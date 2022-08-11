@@ -109,13 +109,11 @@ main {
     color: #fff;
 }
 
-/* footer */
-footer {
-    background-color: #dedede;
-    text-align: center;
-    padding: 40px 0;
-    color: #666;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+
+/*Characters*/
+.card-container{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap:wrap ;
+    justify-content: center;
 }

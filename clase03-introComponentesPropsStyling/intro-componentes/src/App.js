@@ -1,25 +1,43 @@
 import React from 'react'
-import Titulo from './components/Titulo/Titulo'
-import Card from './components/Card'
+import Cards from './components/Cards/Cards'
+
 import Nav from './components/Nav/Nav'
 import Characters from './components/Characters/Characters'
-
+import Footer from './components/Footer/Footer'
+import Categories from './components/Categories/Categories'
+import SpecialButton from './components/SpecialButton/SpecialButton'
 
 function App() {
-  const opciones = ['pages','admin','tables', 'charts', 'Paseo de perritos']
-  const nombresPersonajes = ['ahsoka', 'anakin', 'batman']
+  const opciones = ['pages','admin','tables', 'charts', 'Paseo de perritos', 'Otra opcion']
+
+  const personajes = [
+    'ahsoka',
+    'anakin',
+    'batman',
+    'capAmerica',
+    'cell',
+    'hulkSmall',
+    'kyloRen',
+    'luke',
+    'obiWan',
+    'strange',
+    'superman',
+    'vegetta',
+    'yoda'
+  ]
+
   return (
     <React.Fragment>
-      <Nav opciones={opciones}/>
-      <Titulo />
+      <Nav opciones={opciones} nombre={'Walter'}/>
+      <SpecialButton />
       <main>
-        <section className='top-data'>
-          <Card titulo='Mi primer titulo' milanesa='Que rica milanesa' />
-          <Card titulo='Otro titulo' milanesa='Otra milanesa' />
-          <Card />
+        <Cards />
+        <Categories />
+        <section className="card-container">
+          {personajes.map((personaje, idx) => <Characters key={personaje + idx} name={personaje} />)}
         </section>
       </main>
-      {nombresPersonajes.map(personaje => <Characters name={personaje} />)}
+      <Footer />
     </React.Fragment>
   );
 }

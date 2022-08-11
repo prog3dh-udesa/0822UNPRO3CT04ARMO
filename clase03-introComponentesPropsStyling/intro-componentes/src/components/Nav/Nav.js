@@ -1,14 +1,14 @@
 import React from "react";
 
 function Nav(props){
-    console.log(props.opciones)
+
     return(
     <nav>
         <ul className="main-nav">
-            {props.opciones.map(opcion => <li>{opcion}</li>)}
+            {props.opciones.map((opcion, idx) => <li key={opcion + idx}>{opcion}</li>)}
         </ul>
         <ul className="user">
-            <li>Nombre usuario 
+            <li>{props.nombre}
                 <img src="./img/user.jpg" alt="" />
             </li>
         </ul>
