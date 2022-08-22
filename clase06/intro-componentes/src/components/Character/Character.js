@@ -6,7 +6,19 @@ class Character extends Component {
   constructor(props){
     super(props)
     this.state ={
-      showMore: false
+      verMas: 'hide'
+    }
+  }
+
+  verMas(){
+    if(this.state.verMas === 'show'){
+      this.setState({
+        verMas:'hide'
+      })
+    } else {
+      this.setState({
+        verMas:'show'
+      })
     }
   }
 
@@ -14,11 +26,15 @@ class Character extends Component {
   render(){
     return (
       <div className="character-card">
-            <img src={`./characters/characters/${this.props.info.img}`} alt="" />
+            <img src={this.props.info.image} alt="" />
             <h4>{this.props.info.name}</h4>
             <p>Character description</p>
-            <p>Lorem ipsum</p>
-            <a href="#">Ver más</a>
+            <p>{this.props.info.species}</p>
+            <p>{this.props.info.status}</p>
+  
+              <p className={this.state.verMas}>{this.props.info.origin.name}</p>
+
+            <button onClick={()=>this.verMas()}>Ver más</button>
             <button onClick={()=> this.props.borrar(this.props.info.name)}>Borrar</button>
       </div>
   

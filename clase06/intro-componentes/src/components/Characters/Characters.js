@@ -69,12 +69,16 @@ class Characters extends Component {
     console.log('Soy el Render')
     return (
         <section className="card-container">
-        {this.state.personajes.map((personaje, idx) => 
-        <Character 
-        key={personaje + idx} 
-        info={personaje} 
-        borrar={(name) => this.borrar(name)}
-        />)}
+            {
+                this.state.personajes.length > 0 ?
+                    this.state.personajes.map((personaje, idx) => 
+                    <Character 
+                    key={personaje + idx} 
+                    info={personaje} 
+                    borrar={(name) => this.borrar(name)}
+                    />):
+                <h1>Cargando..</h1>
+            }
       </section>
     )
   }
