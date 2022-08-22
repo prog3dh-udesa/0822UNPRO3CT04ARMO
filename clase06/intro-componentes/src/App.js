@@ -39,9 +39,7 @@ function App() {
         valorRestar={2}
         valorSumar={3}
         />
-        <section className="card-container">
-          {personajes.map((personaje, idx) => <Characters key={personaje + idx} name={personaje} />)}
-        </section>
+        <Characters />
       </main>
       <Footer />
     </React.Fragment>

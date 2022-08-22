@@ -1,17 +1,84 @@
-import React from 'react'
-import './styles.css'
+import React, { Component } from 'react'
+import Character from '../Character/Character';
 
-function Characters(props) {
-  return (
-    <div className="character-card">
-          <img src={`./characters/characters/${props.name}.jpg`} alt="" />
-          <h4>Character Name</h4>
-          <p>Character description</p>
-          <p>Lorem ipsum</p>
-          <a href="#">Ver más</a>
-    </div>
 
-  )
+const info = [
+    {
+        img: 'ahsoka.jpg',
+        name: 'Ashoka',
+        description: 'Character description Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis suscipit voluptatem corporis vitae, eius, alias, omnis exercitationem odit officia nemo molestiae.',
+        extra: 'StarWars',
+    }, 
+    {
+        img: 'anakin.jpg',
+        name: 'Anakin',
+        description: 'Character description Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis suscipit voluptatem corporis vitae, eius, alias, omnis exercitationem odit officia nemo molestiae.',
+        extra: 'StarWars',
+    },
+    {
+        img: 'batman.jpg',
+        name: 'Batman',
+        description: 'Character description Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis suscipit voluptatem corporis vitae, eius, alias, omnis exercitationem odit officia nemo molestiae.',
+        extra: 'DC Comics',
+    },
+    {
+        img: 'hulkSmall.jpg',
+        name: 'Hulk',
+        description: 'Character description Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis suscipit voluptatem corporis vitae, eius, alias, omnis exercitationem odit officia nemo molestiae.',
+        extra: 'Marvel',
+    },
+    {
+        img: 'kyloRen.jpg',
+        name: 'Kylo Ren',
+        description: 'Character description Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis suscipit voluptatem corporis vitae, eius, alias, omnis exercitationem odit officia nemo molestiae.',
+        extra: 'StarWars',
+    },       
+]; 
+
+class Characters extends Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            personajes: [],
+            prueba:''
+        }
+    }
+
+    componentDidMount(){
+        fetch('https://rickandmortyapi.com/api/character')
+        .then(resp => resp.json())
+        .then(data => this.setState({
+            personajes: data.results
+        }))
+        .catch(err => console.log(err))
+        
+    }
+
+    componentDidUpdate(){
+    }
+
+    borrar(name){
+        let personajesFiltrado = this.state.personajes.filter(personaje => personaje.name !== name)
+        this.setState({
+            personajes: personajesFiltrado
+        })
+    }
+
+  render() {
+    console.log('Soy el Render')
+    return (
+        <section className="card-container">
+        {this.state.personajes.map((personaje, idx) => 
+        <Character 
+        key={personaje + idx} 
+        info={personaje} 
+        borrar={(name) => this.borrar(name)}
+        />)}
+      </section>
+    )
+  }
 }
 
-export default Characters 
+
+export default Characters
