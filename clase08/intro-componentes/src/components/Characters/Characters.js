@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Character from '../Character/Character';
 import Search from '../Search/Search'
+import Filtro from '../Filtro/Filtro';
+
 
 const info = [
     {
@@ -41,6 +43,7 @@ class Characters extends Component {
         super(props)
         this.state={
             personajes: [],
+            backup:[],
             prueba:''
         }
     }
@@ -49,10 +52,10 @@ class Characters extends Component {
         fetch('https://rickandmortyapi.com/api/character')
         .then(resp => resp.json())
         .then(data => this.setState({
-            personajes: data.results
+            personajes: data.results,
+            backup:data.results
         }))
-        .catch(err => console.log(err))
-        
+        .catch(err => console.log(err)) 
     }
 
     componentDidUpdate(){
@@ -72,14 +75,25 @@ class Characters extends Component {
             personajes: data.results
         }))
         .catch(err => console.log(err))
+    }
 
+
+    filtrarPersonajes(nombre){
+        let arrayFiltrado = 
+        this.state.backup.filter
+        (personaje => personaje.name.toLowerCase().includes(nombre.toLowerCase()))
+
+        this.setState({
+            personajes: arrayFiltrado
+        })
     }
 
   render() {
     console.log('Soy el Render')
     return (
+        <>
+        <Filtro filtro={(nombre)=> this.filtrarPersonajes(nombre)} />
         <section className="card-container">
-            <Search filtrar={(nombre)=> this.buscarPersonajes(nombre)} />
             {
                 this.state.personajes.length > 0 ?
                     this.state.personajes.map((personaje, idx) => 
@@ -91,6 +105,7 @@ class Characters extends Component {
                 <h1>Cargando..</h1>
             }
       </section>
+        </>
     )
   }
 }
