@@ -4,31 +4,43 @@ class Favorites extends Component{
     constructor(props){
         super(props)
         this.state={
-            personaje:[]
-        }
-    }
-    componentDidMount(){
-        let storage = localStorage.getItem('favoritos')
-        if(storage!== null){
-            let parsedStorage = JSON.parse(storage)
-            
-            Promise.all(
-                parsedStorage.map(elm =>{
-                    return(
-                        fetch(`https://rickandmortyapi.com/api/character/${elm}`)
-                        .then(resp => resp.json())
-                        )
-                })
-            )
-            .then(data => console.log(data))
+            personajesFavoritos: []
         }
     }
 
+    componentDidMount(){
+        let storage = localStorage.getItem('favoritos')
+        if(storage !== null){
+            let parsedStorage = JSON.parse(storage)
+            Promise.all(
+                parsedStorage.map(id =>{
+                    return(
+                        fetch(`https://rickandmortyapi.com/api/character/${id}`)
+                        .then(resp => resp.json())
+                        .then(data => data)
+                    )
+                })
+            ).then(data => this.setState({
+                personajesFavoritos: data
+            }))
+            .catch(err => console.log(err))
+
+            // this.setState({
+            //     personajesFavoritos: parsedStorage
+            // })
+        }
+    }
+    
+
     render(){
         return(
-            <h1>
-                Favoritos
-            </h1>
+            <div>
+                {
+                    this.state.personajesFavoritos.length > 0 ?
+                    this.state.personajesFavoritos.map((elm, idx) => <h4 key={idx + elm.name}>{elm.name}</h4>)
+                    : 'Cargando..'
+                }
+            </div>
         )
     }
 }

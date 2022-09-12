@@ -24,3 +24,13 @@ function App() {
 }
 
 export default App;
+
+/*
+react-jsx-dev-runtime.development.js:87 Warning: Failed prop type: 
+Invalid prop 'component' supplied to 'Route': the prop is not a valid React component
+    at Route (http://localhost:3000/static/js/bundle.js:41658:29)
+    at App
+    at Router (http://localhost:3000/static/js/bundle.js:41277:30)
+    at BrowserRouter (http://localhost:3000/static/js/bundle.js:40898:35)
+
+*/
