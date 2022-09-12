@@ -15,7 +15,7 @@ function App() {
       <main>
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/' component={Favorites} />
+          <Route path='/favorites' component={Favorites} />
         </Switch>
       </main>
       <Footer />

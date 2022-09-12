@@ -17,7 +17,7 @@ class Favorites extends Component{
                     return(
                         fetch(`https://rickandmortyapi.com/api/character/${elm}`)
                         .then(resp => resp.json())
-                        .then(data => data))
+                        )
                 })
             )
             .then(data => console.log(data))
