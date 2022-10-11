@@ -68,7 +68,7 @@ class Characters extends Component {
                     info={personaje} 
                     borrar={(name) => this.borrar(name)}
                     />):
-                <h1>Cargando..</h1>
+                <img src='https://media.giphy.com/avatars/xdelacra/CMHVb2lHgb0u/200h.gif' />
             }
       </section>
         </>
