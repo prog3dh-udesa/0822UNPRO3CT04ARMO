@@ -1,17 +1,17 @@
 import app from 'firebase/app'
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC0_-mnzoaKOFVpBJRXUT21d4FzU2qsvxc",
-    authDomain: "prog03tt-tp.firebaseapp.com",
-    projectId: "prog03tt-tp",
-    storageBucket: "prog03tt-tp.appspot.com",
-    messagingSenderId: "640737354104",
-    appId: "1:640737354104:web:c8eca25067735f6f00288d"
-  };
+    apiKey: "AIzaSyCuA0LVImjuvKPn7PnDTY0j3RZIMLg8unI",
+    authDomain: "prueba3-78056.firebaseapp.com",
+    projectId: "prueba3-78056",
+    storageBucket: "prueba3-78056.appspot.com",
+    messagingSenderId: "266077921155",
+    appId: "1:266077921155:web:15ba8874e03107fa7b60b6"
+};
 
-  app.initializeApp(firebaseConfig)
+app.initializeApp(firebaseConfig)
 
-  export const auth = firebase.auth()
-  export const db = app.firestore()
-  export const storage = app.storage()
+export const db = app.firestore()
+export const storage = app.storage()
+export const auth = firebase.auth()

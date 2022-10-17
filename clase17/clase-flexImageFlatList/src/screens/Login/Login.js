@@ -16,14 +16,14 @@ class Login extends Component {
 
     loguear(mail, pass){
         auth.signInWithEmailAndPassword(mail, pass)
-        .then( resp => this.setState( {logueado: true} ))
+        .then( resp => this.props.navigation.navigate('TabNavigation'))
         .catch(err => console.log(err))
     }
 
   render() {
     console.log(this.props)
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Login</Text>
         <View>
             <TextInput
@@ -57,9 +57,13 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent:'center',
+        paddingHorizontal:32
+    },
     input:{
-        borderWidth:1,
-        borderColor: 'red'
+        borderWidth:1
     }
 })
 

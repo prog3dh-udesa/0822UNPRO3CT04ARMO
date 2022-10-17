@@ -1,51 +1,47 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { auth } from '../../firebase/config'
 
-class Register extends Component {
+
+export default class Register extends Component {
 
     constructor(){
         super()
-        this.state={
-            email:'',
-            password:'',
-            error:''
+        this.state = {
+            mail:'',
+            password:''
         }
     }
 
-    registrar(email, password){
-        auth.createUserWithEmailAndPassword(email, password)
-        .then( resp => console.log(resp))
-        .catch( err => this.setState({error:err.message}))
-    }
+registreUsuarios(email, password){
+    /* auth.signInWithEmailAndPassword()*/
+   auth.createUserWithEmailAndPassword(email, password)
+   .then(resp => console.log(resp))
+   .catch(err => console.log(err))
+}
 
     render() {
         return (
         <View>
-            <Text>Register</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='Escribi tu email'
-                onChangeText={text => this.setState({email: text})}
-                value={this.state.email}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder='Escribi tu password'
-                onChangeText={text => this.setState({password: text})}
-                value={this.state.password}
-                secureTextEntry={true}
-            />
+            <Text>Registra tu usuario</Text>
+
             <View>
-                <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.password)}>
-                    <Text>Registrar usuario</Text>
-                </TouchableOpacity>
+                <TextInput
+                    style = {styles.input}
+                    onChangeText = {(text) => this.setState({mail: text})}
+                    value={this.state.mail}
+                    keyboardType='email-address'
+                    placeholder='Ingresa tu email'
+                />
+                <TextInput
+                    style = {styles.input}
+                    onChangeText = {(text) => this.setState({password: text})}
+                    value={this.state.password}
+                    keyboardType='default'
+                    secureTextEntry={true}
+                    placeholder='Ingresa tu password'
+                />
             </View>
-            {
-                this.state.error !== '' ?
-                <Text>{this.state.error}</Text>:
-                ''
-            }
         </View>
         )
     }
@@ -53,8 +49,6 @@ class Register extends Component {
 
 const styles = StyleSheet.create({
     input:{
-        borderWidth:1
+        borderWidth: 1
     }
 })
-
-export default Register

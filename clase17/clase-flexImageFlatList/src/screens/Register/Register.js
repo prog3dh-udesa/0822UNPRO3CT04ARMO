@@ -15,43 +15,57 @@ class Register extends Component {
 
     registrar(email, password){
         auth.createUserWithEmailAndPassword(email, password)
-        .then( resp => console.log(resp))
+        .then( resp => this.props.navigation.navigate('TabNavigation'))
         .catch( err => this.setState({error:err.message}))
     }
 
     render() {
         return (
-        <View>
-            <Text>Register</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='Escribi tu email'
-                onChangeText={text => this.setState({email: text})}
-                value={this.state.email}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder='Escribi tu password'
-                onChangeText={text => this.setState({password: text})}
-                value={this.state.password}
-                secureTextEntry={true}
-            />
+        <View style={styles.container}>
             <View>
-                <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.password)}>
-                    <Text>Registrar usuario</Text>
-                </TouchableOpacity>
+                <Text>Register</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Escribi tu email'
+                    onChangeText={text => this.setState({email: text})}
+                    value={this.state.email}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Escribi tu password'
+                    onChangeText={text => this.setState({password: text})}
+                    value={this.state.password}
+                    secureTextEntry={true}
+                />
+                <View>
+                    <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.password)}>
+                        <Text>Registrar usuario</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View>
+                    <Text>Ya tienes una cuenta?</Text>
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
+                        <Text>Logueate</Text>
+                    </TouchableOpacity>
+                </View>
+                {
+                    this.state.error !== '' ?
+                    <Text>{this.state.error}</Text>:
+                    ''
+                }
             </View>
-            {
-                this.state.error !== '' ?
-                <Text>{this.state.error}</Text>:
-                ''
-            }
         </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent:'center',
+        paddingHorizontal:32
+    },
     input:{
         borderWidth:1
     }
