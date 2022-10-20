@@ -14,14 +14,6 @@ export default class App extends Component {
       initialScreen:'Login'
     }
   }
-  componentDidMount(){
-    auth.onAuthStateChanged(user =>{
-        console.log(user)
-        if(user !== null){
-            this.setState({initialScreen:'TabNavigation'})
-        }
-    })
-}
   
   render(){
     return (

@@ -14,21 +14,11 @@ class MainNavigation extends Component {
         this.state = {
             initialScreen:'Login'
         }
-        console.log(this.state)
     }
 
-    componentDidMount(){
-        auth.onAuthStateChanged(user =>{
-            console.log(user)
-            if(user !== null){
-                this.setState({initialScreen:'TabNavigation'})
-            }
-        })
-    }
     
     render(){
         
-        console.log(this.state.initialScreen)
         return (
           <NavigationContainer>
               <Stack.Navigator

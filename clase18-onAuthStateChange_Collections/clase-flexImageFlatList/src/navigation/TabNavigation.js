@@ -2,21 +2,23 @@ import { View, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import Home from '../screens/Home/Home'
-import Prueba from '../screens/Prueba/Prueba'
+import Posts from '../screens/Posts/Posts'
 import {FontAwesome} from '@expo/vector-icons'
+import Profile from '../screens/Profile/Profile'
+
 
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigation() {
   return (
     <Tab.Navigator
-    screenOptions={
+    /* screenOptions={
         {
             tabBarStyle:{
                 backgroundColor:'red'
             }
         }
-    }
+    } */
     >
         <Tab.Screen 
         name={'Home'} 
@@ -26,7 +28,8 @@ export default function TabNavigation() {
             headerShown:false
         }}
         />
-        <Tab.Screen name={'Prueba'} component={Prueba} />
+        <Tab.Screen name={'Posts'} component={Posts} />
+        <Tab.Screen name='Profile' component={Profile} />
     </Tab.Navigator>
   )
 }
