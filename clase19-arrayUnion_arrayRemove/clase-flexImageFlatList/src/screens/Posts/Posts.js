@@ -1,55 +1,50 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import React, {Component} from 'react'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
 
+
 class Posts extends Component {
-  constructor(){
-    super()
-    this.state={
-      commentValue: ''
+  
+    constructor(){
+        super()
+        this.state={
+            description:''
+        }
     }
-  }
 
-  submitComment(text){
-    db.collection('comments').add({
-      owner:auth.currentUser.email,
-      createdAt: Date.now(),
-      comment: text
-    })
-    .then(()=> this.setState({commentValue: ''}))
-    .catch(err => console.log(err))
-  }
+    enviarPost(text){
+        db.collection('posts').add({
+            owner:auth.currentUser.email,
+            createdAt: Date.now(),
+            description: text,
+            likes:[],
+            comments:[]
+        })
 
-  render(){
-    return (
-      <View>
-        <Text>Deja tu primer comentario</Text>
+    }
+  
+    render() {
+        return (
         <View>
-          <TextInput
-            value={this.state.commentValue}
-            placeholder='Dejanos tu opinion'
+            <TextInput
+            placeholder='Deja tu descripcion'
+            onChangeText={text => this.setState({description: text})}
+            value={this.state.description}
             keyboardType='default'
-            onChangeText={text => this.setState({commentValue: text})}
             style={styles.input}
-          />
-          <View>
-            <TouchableOpacity onPress={()=> this.submitComment(this.state.commentValue)} >
-              <Text>Enviar comentario</Text>
+            />
+            <TouchableOpacity onPress={()=> this.enviarPost(this.state.description)}>
+                <Text>Enviar posts</Text>
             </TouchableOpacity>
-          </View>
         </View>
-      </View>
-    )
-  }
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-  input:{
-    borderColor:'blue',
-    borderWidth:1,
-    marginHorizontal:16,
-    height:42
-  }
+    input:{
+        height:32,
+        borderWidth:1
+    }
 })
-
 export default Posts
