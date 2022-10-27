@@ -11,10 +11,12 @@ class Posts extends Component {
   }
 
   submitComment(text){
-    db.collection('comments').add({
+    db.collection('posts').add({
       owner:auth.currentUser.email,
       createdAt: Date.now(),
-      comment: text
+      description: text,
+      likes:[],
+      comments:[]
     })
     .then(()=> this.setState({commentValue: ''}))
     .catch(err => console.log(err))
